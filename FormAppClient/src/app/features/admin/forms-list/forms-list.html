@@ -1,0 +1,38 @@
+<div class="forms-container">
+  <div class="forms-header">
+    <div>
+      <h1>Forms</h1>
+      <p>Manage all forms created in the system.</p>
+    </div>
+    <button class="btn-create" (click)="createForm()">+ Create Form</button>
+  </div>
+
+  @if (isLoading()) {
+    <div class="state-message">Loading forms...</div>
+  } @else if (errorMessage()) {
+    <div class="error-banner">{{ errorMessage() }}</div>
+  } @else if (forms().length === 0) {
+    <div class="empty-state">
+      <p>No forms yet.</p>
+      <button class="btn-create" (click)="createForm()">Create your first form</button>
+    </div>
+  } @else {
+    <div class="forms-grid">
+      @for (form of forms(); track form.id) {
+        <div class="form-card">
+          <div class="form-card-body">
+            <h3>{{ form.title }}</h3>
+            @if (form.description) {
+              <p class="description">{{ form.description }}</p>
+            }
+            <span class="field-count">{{ form.fields.length }} field{{ form.fields.length !== 1 ? 's' : '' }}</span>
+          </div>
+          <div class="form-card-footer">
+            <span class="date">{{ form.createdAt | date: 'MMM d, y' }}</span>
+            <button class="btn-delete" (click)="deleteForm(form.id, $event)">Delete</button>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

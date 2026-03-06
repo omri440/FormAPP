@@ -1,0 +1,62 @@
+<div class="admin-shell" [class.sidebar-collapsed]="!isSidebarOpen()">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <div class="brand">
+        <span class="brand-icon">⬡</span>
+        @if (isSidebarOpen()) {
+          <span class="brand-name">FormApp</span>
+        }
+      </div>
+      <button class="toggle-btn" (click)="toggleSidebar()">
+        {{ isSidebarOpen() ? '◀' : '▶' }}
+      </button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="nav-item">
+        <span class="nav-icon">🏠</span>
+        @if (isSidebarOpen()) { <span>Dashboard</span> }
+      </a>
+      <a routerLink="/admin/forms" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">📋</span>
+        @if (isSidebarOpen()) { <span>Forms</span> }
+      </a>
+      <a routerLink="/admin/form-builder" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">➕</span>
+        @if (isSidebarOpen()) { <span>Create Form</span> }
+      </a>
+      <a routerLink="/admin/submissions" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">📥</span>
+        @if (isSidebarOpen()) { <span>Submissions</span> }
+      </a>
+      <a routerLink="/admin/analytics" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">📊</span>
+        @if (isSidebarOpen()) { <span>Analytics</span> }
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="user-info">
+        <div class="user-avatar">{{ user()?.email?.slice(0,2)?.toUpperCase() }}</div>
+        @if (isSidebarOpen()) {
+          <div class="user-details">
+            <span class="user-email">{{ user()?.email }}</span>
+            <span class="user-role">Admin</span>
+          </div>
+        }
+      </div>
+      <button class="logout-btn" (click)="logout()" [title]="'Logout'">
+        <span>🚪</span>
+        @if (isSidebarOpen()) { <span>Logout</span> }
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <main class="main-content">
+    <router-outlet />
+  </main>
+
+</div>

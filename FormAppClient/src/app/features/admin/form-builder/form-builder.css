@@ -1,0 +1,215 @@
+.builder-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.builder-header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.builder-header p {
+  color: #6b7280;
+  margin-bottom: 2rem;
+}
+
+.builder-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.field-group label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.field-group input,
+.field-group select,
+.field-group textarea {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.field-group input:focus,
+.field-group select:focus,
+.field-group textarea:focus {
+  border-color: #6366f1;
+}
+
+.required { color: #ef4444; }
+.hint { font-weight: 400; color: #9ca3af; font-size: 0.8rem; }
+
+.error { color: #ef4444; font-size: 0.8rem; }
+.error-banner {
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  color: #dc2626;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+/* Fields section */
+.fields-section { display: flex; flex-direction: column; gap: 1rem; }
+
+.fields-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fields-header h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.fields-list { display: flex; flex-direction: column; gap: 1rem; }
+
+.field-card {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.field-card.drag-over {
+  border-color: #6366f1;
+  background: #eef2ff;
+}
+
+.field-card.dragging {
+  opacity: 0.6;
+}
+
+.field-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.field-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.field-number { font-weight: 600; color: #6366f1; font-size: 0.875rem; }
+
+.field-row {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.flex-2 { flex: 2; min-width: 180px; }
+.flex-1 { flex: 1; min-width: 120px; }
+
+.checkbox-group { justify-content: flex-end; padding-bottom: 0.25rem; }
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* Buttons */
+.btn-add {
+  background: #ede9fe;
+  color: #6366f1;
+  border: none;
+  padding: 0.4rem 0.9rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.btn-remove {
+  background: #fee2e2;
+  color: #dc2626;
+  border: none;
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.btn-move {
+  background: #e0e7ff;
+  color: #4338ca;
+  border: none;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.btn-move:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-drag {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #e5e7eb;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: grab;
+}
+
+.btn-drag:active {
+  cursor: grabbing;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding-top: 1rem;
+}
+
+.btn-primary {
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.btn-secondary {
+  background: #f3f4f6;
+  color: #374151;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}

@@ -1,0 +1,95 @@
+<div class="home-container">
+
+  <!-- Welcome -->
+  <div class="welcome-bar">
+    <div>
+      <h1>Dashboard</h1>
+      <p>Welcome back. Here's what's happening.</p>
+    </div>
+    <button class="btn-create" (click)="goToCreateForm()">+ Create Form</button>
+  </div>
+
+  @if (isLoading()) {
+    <div class="state-message">Loading...</div>
+  } @else {
+
+    <!-- Stats -->
+    <div class="stats-grid">
+      <div class="stat-card" (click)="goToForms()">
+        <div class="stat-icon forms">📋</div>
+        <div class="stat-info">
+          <span class="stat-value">{{ totalForms() }}</span>
+          <span class="stat-label">Total Forms</span>
+        </div>
+      </div>
+      <div class="stat-card" (click)="goToSubmissions()">
+        <div class="stat-icon submissions">📥</div>
+        <div class="stat-info">
+          <span class="stat-value">{{ totalSubmissions() }}</span>
+          <span class="stat-label">Total Submissions</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon users">👥</div>
+        <div class="stat-info">
+          <span class="stat-value">{{ uniqueUsers() }}</span>
+          <span class="stat-label">Unique Users</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panels">
+
+      <!-- Recent forms -->
+      <div class="panel">
+        <div class="panel-header">
+          <h2>Recent Forms</h2>
+          <button class="btn-link" (click)="goToForms()">View all →</button>
+        </div>
+        @if (recentForms().length === 0) {
+          <p class="empty">No forms yet. <button class="btn-link" (click)="goToCreateForm()">Create one</button></p>
+        } @else {
+          <div class="form-rows">
+            @for (form of recentForms(); track form.id) {
+              <div class="form-row">
+                <div class="form-row-left">
+                  <span class="form-dot"></span>
+                  <span class="form-title">{{ form.title }}</span>
+                </div>
+                <span class="form-meta">{{ form.fields.length }} fields · {{ form.createdAt | date:'MMM d' }}</span>
+              </div>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Recent submissions -->
+      <div class="panel">
+        <div class="panel-header">
+          <h2>Recent Submissions</h2>
+          <button class="btn-link" (click)="goToSubmissions()">View all →</button>
+        </div>
+        @if (recentSubmissions().length === 0) {
+          <p class="empty">No submissions yet.</p>
+        } @else {
+          <div class="submission-rows">
+            @for (s of recentSubmissions(); track s.id) {
+              <div class="submission-row">
+                <div class="mini-avatar" [style.background]="getAvatarColor(s.submittedByEmail)">
+                  {{ s.submittedByEmail.slice(0,2).toUpperCase() }}
+                </div>
+                <div class="submission-info">
+                  <span class="submission-email">{{ s.submittedByEmail }}</span>
+                  <span class="submission-form">{{ s.formTitle }}</span>
+                </div>
+                <span class="submission-date">{{ s.submittedAt | date:'MMM d, HH:mm' }}</span>
+              </div>
+            }
+          </div>
+        }
+      </div>
+
+    </div>
+  }
+
+</div>

@@ -1,0 +1,127 @@
+<div class="builder-container">
+  <div class="builder-header">
+    <h1>Create New Form</h1>
+    <p>Build your form by adding a title and fields below.</p>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="builder-form">
+
+    <div class="field-group">
+      <label for="title">Form Title <span class="required">*</span></label>
+      <input id="title" type="text" formControlName="title" placeholder="e.g. Job Application Form" />
+      @if (form.get('title')?.invalid && form.get('title')?.touched) {
+        <span class="error">Title is required.</span>
+      }
+    </div>
+
+    <div class="field-group">
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description" rows="3"
+        placeholder="Optional — describe what this form is for."></textarea>
+    </div>
+
+    <div class="fields-section">
+      <div class="fields-header">
+        <h2>Fields</h2>
+        <button type="button" class="btn-add" (click)="addField()">+ Add Field</button>
+      </div>
+
+      <div formArrayName="fields" class="fields-list">
+        @for (field of fields.controls; track field; let i = $index) {
+          <div
+            [formGroupName]="i"
+            class="field-card"
+            [class.drag-over]="dragOverIndex === i"
+            [class.dragging]="draggingIndex === i"
+            (dragover)="onDragOver($event)"
+            (drop)="onDrop(i)"
+            (dragenter)="onDragEnter(i)"
+            (dragleave)="onDragLeave(i)"
+          >
+            <div class="field-card-header">
+              <span class="field-number">Field {{ i + 1 }}</span>
+              <div class="field-actions">
+                <button
+                  type="button"
+                  class="btn-drag"
+                  draggable="true"
+                  (dragstart)="onDragStart(i, $event)"
+                  (dragend)="onDragEnd()"
+                  aria-label="Drag to reorder"
+                >
+                  ↕
+                </button>
+                <button
+                  type="button"
+                  class="btn-move"
+                  (click)="moveUp(i)"
+                  [disabled]="i === 0"
+                  aria-label="Move field up"
+                >
+                  ↑
+                </button>
+                <button
+                  type="button"
+                  class="btn-move"
+                  (click)="moveDown(i)"
+                  [disabled]="i === fields.length - 1"
+                  aria-label="Move field down"
+                >
+                  ↓
+                </button>
+                @if (fields.length > 1) {
+                  <button type="button" class="btn-remove" (click)="removeField(i)">Remove</button>
+                }
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field-group flex-2">
+                <label>Label <span class="required">*</span></label>
+                <input type="text" formControlName="label" placeholder="e.g. Full Name" />
+                @if (getFieldGroup(i).get('label')?.invalid && getFieldGroup(i).get('label')?.touched) {
+                  <span class="error">Label is required.</span>
+                }
+              </div>
+
+              <div class="field-group flex-1">
+                <label>Type</label>
+                <select formControlName="fieldType">
+                  @for (type of fieldTypes; track type) {
+                    <option [value]="type">{{ type }}</option>
+                  }
+                </select>
+              </div>
+
+              <div class="field-group checkbox-group">
+                <label class="checkbox-label">
+                  <input type="checkbox" formControlName="isRequired" />
+                  Required
+                </label>
+              </div>
+            </div>
+
+            @if (isSelectType(i)) {
+              <div class="field-group">
+                <label>Options <span class="hint">(comma separated)</span></label>
+                <input type="text" formControlName="options" placeholder="Option A, Option B, Option C" />
+              </div>
+            }
+          </div>
+        }
+      </div>
+    </div>
+
+    @if (errorMessage()) {
+      <div class="error-banner">{{ errorMessage() }}</div>
+    }
+
+    <div class="form-actions">
+      <button type="button" class="btn-secondary" (click)="cancel()">Cancel</button>
+      <button type="submit" class="btn-primary" [disabled]="form.invalid || isSubmitting()">
+        {{ isSubmitting() ? 'Creating...' : 'Create Form' }}
+      </button>
+    </div>
+
+  </form>
+</div>

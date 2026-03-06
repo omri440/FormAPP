@@ -1,0 +1,95 @@
+<div class="auth-wrapper">
+  <div class="auth-card">
+
+    <div class="auth-header">
+      <h1>Create an account</h1>
+      <p>Fill in your details to get started</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="you@example.com"
+          autocomplete="email"
+          [class.input-error]="email.invalid && email.touched"
+        />
+        @if (email.invalid && email.touched) {
+          <span class="field-error">
+            @if (email.errors?.['required']) { Email is required. }
+            @else if (email.errors?.['email']) { Enter a valid email address. }
+          </span>
+        }
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="••••••••"
+          autocomplete="new-password"
+          [class.input-error]="password.invalid && password.touched"
+        />
+        @if (password.errors?.['required'] && password.touched) {
+          <span class="field-error">Password is required.</span>
+        }
+        @if (passwordValue() || password.touched) {
+          <ul class="password-rules">
+            <li [class.rule-ok]="passwordRules().minLength" [class.rule-fail]="!passwordRules().minLength">
+              <span class="rule-icon">{{ passwordRules().minLength ? '✓' : '✗' }}</span> At least 8 characters
+            </li>
+            <li [class.rule-ok]="passwordRules().uppercase" [class.rule-fail]="!passwordRules().uppercase">
+              <span class="rule-icon">{{ passwordRules().uppercase ? '✓' : '✗' }}</span> One uppercase letter (A–Z)
+            </li>
+            <li [class.rule-ok]="passwordRules().lowercase" [class.rule-fail]="!passwordRules().lowercase">
+              <span class="rule-icon">{{ passwordRules().lowercase ? '✓' : '✗' }}</span> One lowercase letter (a–z)
+            </li>
+            <li [class.rule-ok]="passwordRules().number" [class.rule-fail]="!passwordRules().number">
+              <span class="rule-icon">{{ passwordRules().number ? '✓' : '✗' }}</span> One number (0–9)
+            </li>
+            <li [class.rule-ok]="passwordRules().specialChar" [class.rule-fail]="!passwordRules().specialChar">
+              <span class="rule-icon">{{ passwordRules().specialChar ? '✓' : '✗' }}</span> One special character (!@#$%...)
+            </li>
+          </ul>
+        }
+      </div>
+
+      <div class="field">
+        <label for="confirmPassword">Confirm Password</label>
+        <input
+          id="confirmPassword"
+          type="password"
+          formControlName="confirmPassword"
+          placeholder="••••••••"
+          autocomplete="new-password"
+          [class.input-error]="(confirmPassword.invalid && confirmPassword.touched) || passwordMismatch"
+        />
+        @if (confirmPassword.errors?.['required'] && confirmPassword.touched) {
+          <span class="field-error">Please confirm your password.</span>
+        } @else if (passwordMismatch) {
+          <span class="field-error">Passwords do not match.</span>
+        }
+      </div>
+
+      @if (errorMessage()) {
+        <div class="alert-error">{{ errorMessage() }}</div>
+      }
+
+      <button type="submit" class="btn-primary" [disabled]="loading()">
+        @if (loading()) { Creating account... } @else { Create account }
+      </button>
+
+    </form>
+
+    <p class="auth-footer">
+      Already have an account? <a routerLink="/auth/login">Sign in</a>
+    </p>
+
+  </div>
+</div>

@@ -1,0 +1,47 @@
+@if (isLoading()) {
+  <div class="state-message">
+    <div class="spinner"></div>
+    <span>Loading forms…</span>
+  </div>
+} @else if (forms().length === 0) {
+  <div class="empty-state">
+    <div class="empty-icon">📭</div>
+    <h2>No forms available yet</h2>
+    <p>Check back later — new forms will appear here when they're published.</p>
+  </div>
+} @else {
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Available Forms</h1>
+      <p class="page-subtitle">{{ forms().length }} form{{ forms().length !== 1 ? 's' : '' }} available</p>
+    </div>
+  </div>
+
+  <div class="forms-grid">
+    @for (form of forms(); track form.id) {
+      <div class="form-card" [class.submitted]="hasSubmitted(form.id)" (click)="openForm(form.id)">
+        <div class="card-header">
+          <div class="form-icon">{{ hasSubmitted(form.id) ? '✅' : '📝' }}</div>
+          @if (hasSubmitted(form.id)) {
+            <span class="submitted-badge">Submitted</span>
+          }
+        </div>
+
+        <h3 class="form-title">{{ form.title }}</h3>
+
+        @if (form.description) {
+          <p class="form-desc">{{ form.description }}</p>
+        }
+
+        <div class="card-footer">
+          <span class="field-count">
+            {{ form.fields.length }} field{{ form.fields.length !== 1 ? 's' : '' }}
+          </span>
+          <span class="action-label">
+            {{ hasSubmitted(form.id) ? 'Submit again →' : 'Fill out →' }}
+          </span>
+        </div>
+      </div>
+    }
+  </div>
+}

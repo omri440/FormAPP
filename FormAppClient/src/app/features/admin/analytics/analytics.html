@@ -1,0 +1,40 @@
+<div class="analytics-container">
+	<div class="page-header">
+		<div>
+			<h1>Analytics</h1>
+			<p>Submission counts per form.</p>
+		</div>
+	</div>
+
+	@if (isLoading()) {
+		<div class="state-message">Loading analytics...</div>
+	} @else if (errorMessage()) {
+		<div class="error-banner">{{ errorMessage() }}</div>
+	} @else if (formCounts().length === 0) {
+		<div class="state-message">No submissions yet.</div>
+	} @else {
+		<div class="chart-card">
+			<div class="chart-header">
+				<h2>Submissions per Form</h2>
+				<span class="chart-total">Total forms: {{ formCounts().length }}</span>
+			</div>
+
+			<div class="chart-list">
+				@for (item of formCounts(); track item.formTitle) {
+					<div class="chart-row">
+						<div class="chart-label">
+							<span class="form-title">{{ item.formTitle }}</span>
+							<span class="form-count">{{ item.count }}</span>
+						</div>
+						<div class="bar-track">
+							<div
+								class="bar-fill"
+								[style.width.%]="(item.count / maxCount()) * 100"
+							></div>
+						</div>
+					</div>
+				}
+			</div>
+		</div>
+	}
+</div>

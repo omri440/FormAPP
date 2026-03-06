@@ -1,0 +1,75 @@
+<div class="submission-container">
+
+  @if (isLoading()) {
+    <div class="state-message">Loading form...</div>
+  } @else if (isSuccess()) {
+    <div class="success-card">
+      <div class="success-icon">✓</div>
+      <h2>Submitted!</h2>
+      <p>Your response has been recorded.</p>
+      <button class="btn-primary" (click)="goBack()">Back to Dashboard</button>
+    </div>
+  } @else if (form()) {
+    <div class="form-header">
+      <button class="btn-back" (click)="goBack()">← Back</button>
+      <h1>{{ form()!.title }}</h1>
+      @if (form()!.description) {
+        <p class="description">{{ form()!.description }}</p>
+      }
+    </div>
+
+    <form class="submission-form" (ngSubmit)="submit()">
+      @for (field of form()!.fields; track field.id) {
+        <div class="field-group">
+          <label>
+            {{ field.label }}
+            @if (field.isRequired) { <span class="required">*</span> }
+          </label>
+
+          @if (field.fieldType === 'text') {
+            <input type="text" [value]="getAnswer(field.id)"
+              (input)="setAnswer(field.id, $any($event.target).value)" />
+          }
+          @if (field.fieldType === 'number') {
+            <input type="number" [value]="getAnswer(field.id)"
+              (input)="setAnswer(field.id, $any($event.target).value)" />
+          }
+          @if (field.fieldType === 'textarea') {
+            <textarea rows="4" [value]="getAnswer(field.id)"
+              (input)="setAnswer(field.id, $any($event.target).value)"></textarea>
+          }
+          @if (field.fieldType === 'select') {
+            <select [value]="getAnswer(field.id)"
+              (change)="setAnswer(field.id, $any($event.target).value)">
+              <option value="">— Select an option —</option>
+              @for (opt of getOptions(field); track opt) {
+                <option [value]="opt">{{ opt }}</option>
+              }
+            </select>
+          }
+          @if (field.fieldType === 'checkbox') {
+            <label class="checkbox-label">
+              <input type="checkbox"
+                [checked]="getAnswer(field.id) === 'true'"
+                (change)="toggleCheckbox(field.id)" />
+              {{ field.label }}
+            </label>
+          }
+        </div>
+      }
+
+      @if (errorMessage()) {
+        <div class="error-banner">{{ errorMessage() }}</div>
+      }
+
+      <div class="form-actions">
+        <button type="submit" class="btn-primary" [disabled]="!isValid() || isSubmitting()">
+          {{ isSubmitting() ? 'Submitting...' : 'Submit' }}
+        </button>
+      </div>
+    </form>
+  } @else {
+    <div class="state-message">Form not found.</div>
+  }
+
+</div>
