@@ -47,9 +47,10 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngularClient", policy =>
     {
-        policy.WithOrigins("http://localhost", "http://localhost:80", "http://127.0.0.1", "http://127.0.0.1:80")
+        policy.WithOrigins("http://localhost", "http://localhost:80", "http://127.0.0.1", "http://127.0.0.1:80","https://form-app-frontend-zxzo.onrender.com")
               .AllowAnyHeader()
-              .AllowAnyMethod();
+              .AllowAnyMethod()
+              .AllowCredentials();
     });
 });
 
