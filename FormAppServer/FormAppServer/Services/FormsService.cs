@@ -60,9 +60,16 @@ public class FormsService : IFormsService
     }
 
     // DELETE — admin deletes a form (cascade removes fields + entries)
+    // Must eager-load all children so EF Core deletes EntryValues before
+    // FormFields — otherwise the RESTRICT FK on EntryValues.FormFieldId fails.
     public async Task<bool> DeleteFormAsync(int id)
     {
-        var form = await _db.Forms.FindAsync(id);
+        var form = await _db.Forms
+            .Include(f => f.Fields)
+            .Include(f => f.Entries)
+                .ThenInclude(e => e.Values)
+            .FirstOrDefaultAsync(f => f.Id == id);
+
         if (form is null) return false;
 
         _db.Forms.Remove(form);
