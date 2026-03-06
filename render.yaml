@@ -1,0 +1,24 @@
+services:
+  # הגדרות עבור ה-Backend (.NET)
+  - type: web
+    name: form-app-backend
+    env: docker
+    dockerContext: FormAppServer
+    dockerfilePath: Dockerfile
+    plan: free
+    envVars:
+      - key: ASPNETCORE_URLS
+        value: http://+:8080
+      - key: PORT
+        value: 8080
+
+  # הגדרות עבור ה-Frontend
+  - type: web
+    name: form-app-frontend
+    env: docker
+    dockerContext: FormAppClient
+    dockerfilePath: Dockerfile
+    plan: free
+    envVars:
+      - key: BACKEND_URL
+        value: https://form-app-backend.onrender.com
