@@ -83,8 +83,8 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.UseMiddleware<FormAppServer.Middleware.ErrorHandlingMiddleware>();
 app.UseCors("AllowAngularClient");
+app.UseMiddleware<FormAppServer.Middleware.ErrorHandlingMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
