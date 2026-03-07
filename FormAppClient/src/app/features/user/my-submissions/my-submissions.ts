@@ -7,12 +7,13 @@ import {
   signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LucideAngularModule } from 'lucide-angular';
 import { SubmissionsService } from '../../../core/services/submissions';
 import { Submission } from '../../../core/models/submission.model';
 
 @Component({
   selector: 'app-my-submissions',
-  imports: [CommonModule],
+  imports: [CommonModule, LucideAngularModule],
   templateUrl: './my-submissions.html',
   styleUrl: './my-submissions.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

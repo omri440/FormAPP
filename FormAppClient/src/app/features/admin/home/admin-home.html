@@ -16,21 +16,21 @@
     <!-- Stats -->
     <div class="stats-grid">
       <div class="stat-card" (click)="goToForms()">
-        <div class="stat-icon forms">📋</div>
+        <div class="stat-icon forms"><lucide-icon name="layout-list" [size]="24" /></div>
         <div class="stat-info">
           <span class="stat-value">{{ totalForms() }}</span>
           <span class="stat-label">Total Forms</span>
         </div>
       </div>
       <div class="stat-card" (click)="goToSubmissions()">
-        <div class="stat-icon submissions">📥</div>
+        <div class="stat-icon submissions"><lucide-icon name="inbox" [size]="24" /></div>
         <div class="stat-info">
           <span class="stat-value">{{ totalSubmissions() }}</span>
           <span class="stat-label">Total Submissions</span>
         </div>
       </div>
       <div class="stat-card">
-        <div class="stat-icon users">👥</div>
+        <div class="stat-icon users"><lucide-icon name="users" [size]="24" /></div>
         <div class="stat-info">
           <span class="stat-value">{{ uniqueUsers() }}</span>
           <span class="stat-label">Unique Users</span>

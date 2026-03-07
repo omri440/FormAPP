@@ -41,7 +41,7 @@
     <!-- Search -->
     <div class="search-bar">
       <div class="search-input-wrap">
-        <span class="search-icon">🔍</span>
+        <lucide-icon name="search" [size]="16" class="search-icon" />
         <input
           type="text"
           placeholder="Search by user email..."
@@ -49,7 +49,7 @@
           (ngModelChange)="searchUser.set($event)" />
       </div>
       <div class="search-input-wrap">
-        <span class="search-icon">📋</span>
+        <lucide-icon name="layout-list" [size]="16" class="search-icon" />
         <input
           type="text"
           placeholder="Search by form name..."
@@ -57,7 +57,9 @@
           (ngModelChange)="searchForm.set($event)" />
       </div>
       @if (searchUser() || searchForm()) {
-        <button class="btn-clear" (click)="clearSearch()">✕ Clear</button>
+        <button class="btn-clear" (click)="clearSearch()">
+          <lucide-icon name="x" [size]="14" /> Clear
+        </button>
       }
     </div>
 
@@ -111,7 +113,7 @@
             <span class="detail-date">{{ selectedSubmission()!.submittedAt | date: 'MMMM d, y — HH:mm' }}</span>
           </div>
         </div>
-        <button class="btn-close" (click)="closeDetail()">✕</button>
+        <button class="btn-close" (click)="closeDetail()"><lucide-icon name="x" [size]="18" /></button>
       </div>
 
       <div class="detail-body">

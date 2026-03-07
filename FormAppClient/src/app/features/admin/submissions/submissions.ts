@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, computed, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { LucideAngularModule } from 'lucide-angular';
 import { SubmissionsService } from '../../../core/services/submissions';
 import { Submission } from '../../../core/models/submission.model';
 
 @Component({
   selector: 'app-submissions',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, LucideAngularModule],
   templateUrl: './submissions.html',
   styleUrl: './submissions.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

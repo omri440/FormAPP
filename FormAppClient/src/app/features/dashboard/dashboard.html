@@ -5,7 +5,7 @@
   </div>
 } @else if (forms().length === 0) {
   <div class="empty-state">
-    <div class="empty-icon">📭</div>
+    <div class="empty-icon"><lucide-icon name="inbox" [size]="48" /></div>
     <h2>No forms available yet</h2>
     <p>Check back later — new forms will appear here when they're published.</p>
   </div>
@@ -21,7 +21,13 @@
     @for (form of forms(); track form.id) {
       <div class="form-card" [class.submitted]="hasSubmitted(form.id)" (click)="openForm(form.id)">
         <div class="card-header">
-          <div class="form-icon">{{ hasSubmitted(form.id) ? '✅' : '📝' }}</div>
+          <div class="form-icon">
+            @if (hasSubmitted(form.id)) {
+              <lucide-icon name="circle-check" [size]="22" />
+            } @else {
+              <lucide-icon name="file-text" [size]="22" />
+            }
+          </div>
           @if (hasSubmitted(form.id)) {
             <span class="submitted-badge">Submitted</span>
           }

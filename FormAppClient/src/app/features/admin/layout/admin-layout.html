@@ -10,29 +10,33 @@
         }
       </div>
       <button class="toggle-btn" (click)="toggleSidebar()">
-        {{ isSidebarOpen() ? '◀' : '▶' }}
+        @if (isSidebarOpen()) {
+          <lucide-icon name="chevron-left" [size]="16" />
+        } @else {
+          <lucide-icon name="chevron-right" [size]="16" />
+        }
       </button>
     </div>
 
     <nav class="sidebar-nav">
       <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="nav-item">
-        <span class="nav-icon">🏠</span>
+        <span class="nav-icon"><lucide-icon name="house" [size]="18" /></span>
         @if (isSidebarOpen()) { <span>Dashboard</span> }
       </a>
       <a routerLink="/admin/forms" routerLinkActive="active" class="nav-item">
-        <span class="nav-icon">📋</span>
+        <span class="nav-icon"><lucide-icon name="layout-list" [size]="18" /></span>
         @if (isSidebarOpen()) { <span>Forms</span> }
       </a>
       <a routerLink="/admin/form-builder" routerLinkActive="active" class="nav-item">
-        <span class="nav-icon">➕</span>
+        <span class="nav-icon"><lucide-icon name="plus" [size]="18" /></span>
         @if (isSidebarOpen()) { <span>Create Form</span> }
       </a>
       <a routerLink="/admin/submissions" routerLinkActive="active" class="nav-item">
-        <span class="nav-icon">📥</span>
+        <span class="nav-icon"><lucide-icon name="inbox" [size]="18" /></span>
         @if (isSidebarOpen()) { <span>Submissions</span> }
       </a>
       <a routerLink="/admin/analytics" routerLinkActive="active" class="nav-item">
-        <span class="nav-icon">📊</span>
+        <span class="nav-icon"><lucide-icon name="chart-bar" [size]="18" /></span>
         @if (isSidebarOpen()) { <span>Analytics</span> }
       </a>
     </nav>
@@ -48,7 +52,7 @@
         }
       </div>
       <button class="logout-btn" (click)="logout()" [title]="'Logout'">
-        <span>🚪</span>
+        <lucide-icon name="log-out" [size]="16" />
         @if (isSidebarOpen()) { <span>Logout</span> }
       </button>
     </div>

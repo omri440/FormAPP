@@ -2,12 +2,13 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { LucideAngularModule } from 'lucide-angular';
 import { FormsService } from '../../../core/services/forms';
 import { FieldType } from '../../../core/models/form.model';
 
 @Component({
   selector: 'app-form-builder',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, LucideAngularModule],
   templateUrl: './form-builder.html',
   styleUrl: './form-builder.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

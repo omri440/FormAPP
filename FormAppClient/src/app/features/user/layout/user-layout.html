@@ -9,11 +9,11 @@
 
     <nav class="navbar-links">
       <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="nav-link">
-        <span class="nav-icon">📋</span>
+        <lucide-icon name="layout-list" [size]="16" class="nav-icon" />
         <span>Forms</span>
       </a>
       <a routerLink="/dashboard/my-submissions" routerLinkActive="active" class="nav-link">
-        <span class="nav-icon">📥</span>
+        <lucide-icon name="inbox" [size]="16" class="nav-icon" />
         <span>My Submissions</span>
       </a>
     </nav>
@@ -25,7 +25,7 @@
       <div class="user-email">{{ user()?.email }}</div>
 
       <button class="logout-btn" (click)="logout()" title="Logout">
-        <span>🚪</span>
+        <lucide-icon name="log-out" [size]="16" />
         <span class="logout-label">Logout</span>
       </button>
     </div>

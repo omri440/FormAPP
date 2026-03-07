@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { LucideAngularModule } from 'lucide-angular';
 import { FormsService } from '../../../core/services/forms';
 import { SubmissionsService } from '../../../core/services/submissions';
 import { AppForm } from '../../../core/models/form.model';
@@ -8,7 +9,7 @@ import { Submission } from '../../../core/models/submission.model';
 
 @Component({
   selector: 'app-admin-home',
-  imports: [CommonModule],
+  imports: [CommonModule, LucideAngularModule],
   templateUrl: './admin-home.html',
   styleUrl: './admin-home.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
