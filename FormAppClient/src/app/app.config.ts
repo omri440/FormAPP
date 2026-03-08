@@ -23,6 +23,7 @@ import {
   CircleCheck,
   MailOpen,
   Users,
+  ShieldOff,
 } from 'lucide-angular';
 
 export const appConfig: ApplicationConfig = {
@@ -52,6 +53,7 @@ export const appConfig: ApplicationConfig = {
         CircleCheck,
         MailOpen,
         Users,
+        ShieldOff,
       }),
     },
   ]

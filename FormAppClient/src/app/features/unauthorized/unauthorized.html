@@ -1,1 +1,22 @@
-<p>unauthorized works!</p>
+<div class="unauth-wrapper">
+  <div class="unauth-card">
+
+    <div class="unauth-icon">
+      <lucide-icon name="shield-off" [size]="56" />
+    </div>
+
+    <div class="unauth-code">403</div>
+
+    <h1 class="unauth-title">Access Denied</h1>
+    <p class="unauth-desc">
+      You don't have permission to view this page.<br />
+      Please log in with an account that has the required role.
+    </p>
+
+    <div class="unauth-actions">
+      <a routerLink="/auth/login" class="btn-primary">Back to Login</a>
+      <a routerLink="/dashboard" class="btn-secondary">Go to Dashboard</a>
+    </div>
+
+  </div>
+</div>
